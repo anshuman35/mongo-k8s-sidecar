@@ -5,10 +5,12 @@ var util = require("util");
 fs = require('fs');
 
 var readToken = fs.readFileSync('/var/run/secrets/kubernetes.io/serviceaccount/token');
-
+var 
 var client = new Client({
+  
   host: config.k8sROServiceAddress,
   namespace: config.namespace,
+  
   protocol: 'https',
   version: 'v1',
   token: readToken
@@ -22,11 +24,13 @@ var getMongoPods = function getPods(done) {
     var pods = [];
     for (var j in podResult) {
       pods = pods.concat(podResult[j].items)
+      pods = pods.concat(podResult[j+1].items)
+      
     }
     var labels = config.mongoPodLabelCollection;
     var results = [];
     for (var i in pods) {
-      var pod = pods[i];
+      var pod = pods[i+1];
       if (podContainsLabels(pod, labels)) {
         results.push(pod);
       }
