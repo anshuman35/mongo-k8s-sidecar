@@ -22,6 +22,7 @@ var getMongoPods = function getPods(done) {
     var pods = [];
     for (var j in podResult) {
       pods = pods.concat(podResult[j].items)
+      pods = pods.concat(podResult[])
     }
     var labels = config.mongoPodLabelCollection;
     var results = [];
